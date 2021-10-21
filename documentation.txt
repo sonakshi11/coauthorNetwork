@@ -1,0 +1,9 @@
+For development environment
+
+- Use the following code to install the required packages
+conda env create -f environment.yml
+
+- activate the conda environemt 
+
+- run the application in the env using
+flask run
