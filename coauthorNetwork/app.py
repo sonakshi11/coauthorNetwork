@@ -25,7 +25,7 @@ from bokeh.embed import components
 from bokeh.resources import CDN, INLINE
 
 import time
-import application.utils as utils
+import utils
 
 
 app = Flask(__name__)
@@ -278,4 +278,4 @@ def Edges(query, coauth1, coauth2):
 
 
 if __name__ == "__main__":
-    app.run(debug= True)
+    app.run(debug= True, host="0.0.0.0", port=8159)

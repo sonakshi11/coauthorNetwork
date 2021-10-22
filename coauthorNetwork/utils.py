@@ -1,4 +1,4 @@
-import application.trie as trie
+import trie
 import csv
 word_list = []
 
@@ -6,7 +6,7 @@ full_name_root = trie.Node()
 # middle_name_root = trie.Node()
 last_name_root = trie.Node()
 
-with open('application/data/test.csv', 'r') as csvFile:
+with open('./data/test.csv', 'r') as csvFile:
     reader = csv.reader(csvFile)
     counter=0
     for w in reader:
