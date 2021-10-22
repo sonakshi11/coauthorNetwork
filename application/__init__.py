@@ -57,15 +57,15 @@ def requires_auth(f):
         return f(*args, **kwargs)
     return decorated
 
-@app.route('/process_search')
-def gen_search_json():
-    query = request.args.get("q", '')
-    query = utils.process_term(query)
-    results = utils.get_results(query.strip())
-    print(results)
-    resp = jsonify(results=results[:10])  # top 10 results
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    return resp
+# @app.route('/process_search')
+# def gen_search_json():
+#     query = request.args.get("q", '')
+#     query = utils.process_term(query)
+#     results = utils.get_results(query.strip())
+#     print(results)
+#     resp = jsonify(results=results[:10])  # top 10 results
+#     resp.headers['Access-Control-Allow-Origin'] = '*'
+#     return resp
 
 @app.route("/", methods = ['GET'])
 def index():
