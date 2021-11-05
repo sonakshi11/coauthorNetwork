@@ -102,7 +102,7 @@ def graph(nodes, edges):
 
     border= ['Black']*len(color)
     if color[0]=='Red':
-        border[0]='Red'
+        border[0]='Black'
     else:
         border[0]='Black'
     border_colors = dict(zip(G.nodes, border))
