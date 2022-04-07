@@ -1,1 +1,1 @@
-from application import app
+from coauthorNetwork.app import app

@@ -226,14 +226,26 @@
                     },
                     processResults: function (data, params) {
                         console.log(data);
+                        // console.log(results);
+                        // var item = {
+                        //     "results": []
+                        // }
+                        // $.each(data.results, function(index, result){
+                        //         item.results.push({"id": result.name, "text": result.name});
+                        // })
+                        // var result=item;
+                        // return result;
                         var item = {
                             "results": []
                         }
-                        $.each(data.results, function(index, result){
+                        $.each(data, function(index, result){
                                 item.results.push({"id": result.name, "text": result.name});
                         })
                         var result=item;
                         return result;
+                        // return {
+                        //     results: data
+                        // };
                     }
                 },
                 minimumInputLength: 3

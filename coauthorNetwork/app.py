@@ -25,7 +25,7 @@ from bokeh.embed import components
 from bokeh.resources import CDN, INLINE
 
 import time
-import utils
+# import coauthorNetwork.utils as utils
 
 
 app = Flask(__name__)
@@ -34,6 +34,9 @@ mongolab_uri = 'mongodb://SciSci_user:MPrEHActItDo@gaanam4.mse.gatech.edu:8161/S
 connection = pymongo.MongoClient(host=mongolab_uri)        
 db = connection['SciSci']
 collection = db.authors
+
+# collection.create_index([("search_key", pymongo.TEXT)])
+
 
 def check_auth(username, password):
     """This function is called to check if a username /
@@ -60,11 +63,15 @@ def requires_auth(f):
 @app.route('/process_search')
 def gen_search_json():
     query = request.args.get("q", '')
-    query = utils.process_term(query)
-    results = utils.get_results(query.strip())
-    print(results)
-    resp = jsonify(results=results[:10])  # top 10 results
-    resp.headers['Access-Control-Allow-Origin'] = '*'
+    print(query)
+    # query = utils.process_term(query)
+    # results = utils.get_results(query.strip())
+    # resp = jsonify(results=results[:10])  # top 10 results
+    # resp.headers['Access-Control-Allow-Origin'] = '*'
+    cursor = collection.find({'$text':{'$search': query}}, { 'score': { '$meta': "textScore" }, 'name' :1, '_id':0})
+    # cursor = collection.aggregate([{ '$match': { '$text': { '$search': query ,'$language': 'es',  '$diacriticSensitive': True} } }, { '$sort': { 'score': { '$meta': "textScore" } } }, { '$project': { 'name': 1 , '_id': 0} }])
+    resp = jsonify(list(cursor))
+    print(resp)
     return resp
 
 @app.route("/", methods = ['GET'])
